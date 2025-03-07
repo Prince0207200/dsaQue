@@ -1,3 +1,48 @@
+
+class Solution {
+public:
+    vector<int> closestPrimes(int left, int right) {
+        
+
+        
+        vector<bool> arr(right + 1, true);
+        arr[0] = arr[1] = false;  
+
+        for (int i = 2; i * i <= right; i++) {
+            if (arr[i]) {
+                for (int j = 2; i*j <= right; j++) {  
+                    arr[j*i] = false;
+                }
+            }
+        }
+
+        
+        vector<int> primes;
+        for (int i = left; i <= right; i++) {
+            if (arr[i]) {
+                primes.push_back(i);
+            }
+        }
+
+       
+        
+
+        int minDiff = INT_MAX;
+        vector<int> res = {-1, -1};
+        for (int i = 1; i < primes.size(); i++) {  
+            int diff = primes[i] - primes[i - 1];
+            if (diff < minDiff) {
+                minDiff = diff;
+                res = {primes[i - 1], primes[i]};
+            }
+        }
+
+        return res;
+    }
+};
+
+
+
 class Solution {
 public:
     vector<int> closestPrimes(int left, int right) {
