@@ -1,0 +1,59 @@
+class Solution {
+public:
+    bool isVowel(char &ch){
+        return ch=='a'||ch=='e'||ch=='i'||ch=='o'||ch=='u';
+    }
+    long long countOfSubstrings(string word, int k) {
+        int n=word.length();
+        unordered_map<char,int>  mp;
+
+        vector<int> nextConst(n);
+        int lastConstIdx=n;
+        for(int i=n-1;i>=0;i--){
+            nextConst[i]=lastConstIdx;
+            if(!isVowel(word[i])){
+                lastConstIdx=i;
+            }
+
+        }
+        int i=0,j=0,cc=0;
+        long long res=0;
+        while(j<n){
+            char ch=word[j];
+            if(isVowel(ch)){
+                mp[ch]++;
+            }else{
+                cc++;
+            }
+            while(cc>k){
+                char ch=word[i];
+                if(isVowel(ch)){
+                    mp[ch]--;
+                    if(mp[ch]==0){
+                        mp.erase(ch);
+                    }
+                }else{
+                    cc--;
+                }
+                i++;
+            }
+            while(mp.size()==5 && cc==k){
+                int idx=nextConst[j];
+                res = res+(idx-j);
+                char ch=word[i];
+                if(isVowel(ch)){
+                    mp[ch]--;
+                    if(mp[ch]==0){
+                        mp.erase(ch);
+                    }
+                }else{
+                    cc--;
+                }
+                i++;
+
+            }
+            j++;
+        }
+        return res;
+    }
+};
