@@ -1,0 +1,64 @@
+class Solution {
+public:
+    int maximumCount(vector<int>& nums) {
+        int n=nums.size();
+        int s=0,e=n-1;
+        int mid=s+(e-s)/2;
+        int ans1=n,ans2=n;
+        while(s<=e){
+            mid=s+(e-s)/2;
+            if(nums[mid]>=1){
+                ans1=mid;
+                e=mid-1;
+            }
+            if(nums[mid]<1){
+                s=mid+1;
+            }
+
+            
+        }
+        s=0,e=n-1;
+        while(s<=e){
+            mid=s+(e-s)/2;
+            if(nums[mid]>=0){
+                ans2=mid;
+                e=mid-1;
+            }
+            if(nums[mid]<0){
+                s=mid+1;
+            }
+
+            
+        }
+        return max(n-ans1,ans2);
+
+        // int n=nums.size();
+        // auto lb=lower_bound(nums.begin(),nums.end(),1)-nums.begin();
+        
+        // auto b=lower_bound(nums.begin(),nums.end(),0)-nums.begin();
+        // return max(n-lb,b);
+
+
+    //  auto lambdaP=[](int num){
+    //         return num>0;
+    //     };
+    //     auto lambdaN=[](int num){
+    //         return num<0;
+    //     };
+    //     int P=count_if(nums.begin(),nums.end(),lambdaP);
+    //     int N=count_if(nums.begin(),nums.end(),lambdaN);
+    //     return max(P,N);
+
+
+        // int n=nums.size();
+        // int pc=0,nc=0;
+        // for(int i=0;i<n;i++){
+        //     if(nums[i]>0){
+        //         pc++;
+        //     }else if(nums[i]<0){
+        //         nc++;
+        //     }
+        // }
+        // return max(pc,nc);
+    }
+};
