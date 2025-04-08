@@ -11,9 +11,9 @@ public:
             maxA=max(maxA, (h*w));
             if(height[i]<height[j]){
                 i++;
-            }else{
+            }else
                 j--;
-            }
+            
         }
         return maxA;
     }
